@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,9 @@ Auth::routes([
 Route::get('/', [DashboardController::class, 'index'])->name('home');
 Route::resource('users', UserController::class);
 Route::get('/user/table', [UserController::class, 'table'])->name('users.table');
+
+Route::get('/category/table', [CategoryController::class, 'table'])->name('category.table');
+Route::resource('category', CategoryController::class)->except(['show', 'create']);
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
