@@ -104,7 +104,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ $product->name }}</h5>
+                    <h5 class="modal-title"></h5>
                     <div class="row">
                         <span class="badge text-white mb-2 stock rounded-pill"></span>
                         <span class="badge text-white status"></span>
@@ -162,6 +162,7 @@
                     },
                     success: function(response) {
                         $('#showModal').modal('show');
+                        $('.modal-title').text(response.product.name);
                         $('.stock').text('Stock : ' + response.product.qty);
                         $('.status').text('Status :' + (response.product.status == 1 ? ' Ready' : ' Not Ready'));
                         $('.product-code').val(response.product.code);
