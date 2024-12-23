@@ -50,3 +50,7 @@ $(".show-confirm").click(function (event) {
         }
     });
 });
+
+document.addEventListener("trix-file-accept", function (e) {
+    e.preventDefault;
+});
