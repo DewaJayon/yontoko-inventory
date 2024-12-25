@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ Route::get('/category/table', [CategoryController::class, 'table'])->name('categ
 Route::resource('category', CategoryController::class)->except(['show', 'create']);
 
 Route::resource('product', ProductController::class);
+Route::resource('pos', PosController::class);
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
