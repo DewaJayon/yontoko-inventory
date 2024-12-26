@@ -1,7 +1,9 @@
 @forelse ($products as $product)
-    <div class="col-sm-6 col-lg-3 mb-3">
+    <div class="col-sm-6 col-lg-3 mb-3 add-to-cart" data-id="{{ $product->id }}" style="cursor: pointer">
         <div class="card card-sm">
-            <a href="#" class="d-block"><img src="{{ asset('storage/' . $product->image) }}" class="card-img-top"></a>
+            <div class="d-block">
+                <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top">
+            </div>
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
