@@ -12,9 +12,25 @@ class PosController extends Controller
      */
     public function index()
     {
+        $request = request();
+
+        if ($request->search) {
+            return $this->search($request);
+        }
+
         return view("pos.index", [
             "title"     => "POS System",
             "products"  => Product::all()
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $products = Product::where("name", "like", "%$request->search%")->get();
+
+        return view("pos.search", [
+            "title"     => "POS System",
+            "products"  => $products
         ]);
     }
 

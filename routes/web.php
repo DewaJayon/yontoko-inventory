@@ -21,6 +21,7 @@ Route::get('/category/table', [CategoryController::class, 'table'])->name('categ
 Route::resource('category', CategoryController::class)->except(['show', 'create']);
 
 Route::resource('product', ProductController::class);
+Route::get('/pos/search', [PosController::class, 'search'])->name('pos.search');
 Route::resource('pos', PosController::class);
 
 

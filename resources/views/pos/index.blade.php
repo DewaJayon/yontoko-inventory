@@ -15,7 +15,7 @@
                     <div class="d-flex">
                         <div class="me-3">
                             <div class="input-icon">
-                                <input type="text" value="" class="form-control" placeholder="Search…">
+                                <input type="text" name="search" id="search" value="" class="form-control" placeholder="Search…" autocomplete="off">
                                 <span class="input-icon-addon">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -37,7 +37,8 @@
         <div class="container-xl">
             <div class="row row-cards">
                 <div class="col-8">
-                    <div class="row">
+                    <div class="row" id="products">
+
                         @forelse ($products as $product)
                             <div class="col-sm-6 col-lg-3 mb-3">
                                 <div class="card card-sm">
@@ -74,6 +75,7 @@
                         @empty
                             <div class="col-12">Belum ada produk</div>
                         @endforelse
+
                     </div>
                 </div>
 
@@ -272,4 +274,24 @@
             </div> --}}
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#search').on('keyup', function() {
+                $.ajax({
+                    url: "{{ route('pos.search') }}",
+                    method: "GET",
+                    data: {
+                        search: $(this).val()
+                    },
+                    success: function(data) {
+                        $('#products').html(data);
+                    }
+                })
+            })
+
+        });
+    </script>
 @endsection
