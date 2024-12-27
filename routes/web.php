@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pos/search', [PosController::class, 'search'])->name('pos.search');
     Route::resource('pos', PosController::class);
     Route::resource('cart', CartController::class);
+    Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 });
 
 
