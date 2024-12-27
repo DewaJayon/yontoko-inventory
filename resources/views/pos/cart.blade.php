@@ -25,8 +25,43 @@
                     <div class="col">
                         <div class="card-body">
                             {{ $cart->product->name }}
-                            <div class="text-secondary">
-                                {{ number_format($cart->product->price) }} x {{ $cart->quantity }}
+                            <div class="row">
+                                <div class="col-6">
+
+                                    <div class="text-secondary">
+                                        {{ number_format($cart->product->price) }}
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-plus rounded-circle border plus-button" type="button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-plus">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                                    <path d="M15 12h-6" />
+                                                    <path d="M12 9v6" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <input type="number" class="form-control form-control-sm text-center rounded-pill" value="{{ $cart->quantity }}">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-plus rounded-circle border" type="button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-plus">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                                    <path d="M15 12h-6" />
+                                                    <path d="M12 9v6" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
