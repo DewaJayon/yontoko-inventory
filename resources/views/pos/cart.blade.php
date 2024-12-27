@@ -29,7 +29,6 @@
                     <div class="col">
                         <div class="card-body">
                             {{ $cart->product->name }}
-<<<<<<< HEAD
                             <div class="row">
                                 <div class="col-6">
 
@@ -67,10 +66,6 @@
                                     </div>
 
                                 </div>
-=======
-                            <div class="text-secondary">
-                                Rp. {{ number_format($cart->product->price) }} x {{ $cart->quantity }}
->>>>>>> 862026d5bc2a531c778f0f1dd395acd11bf9d064
                             </div>
                         </div>
                     </div>
