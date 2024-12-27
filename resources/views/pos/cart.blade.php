@@ -1,20 +1,24 @@
 <div class="card-header">
     <h3 class="card-title">Cart</h3>
-    <div class="card-actions"></div>
-    <a href="#" class="card-action">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-trash">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <line x1="4" y1="7" x2="20" y2="7" />
-            <line x1="10" y1="11" x2="10" y2="17" />
-            <line x1="14" y1="11" x2="14" y2="17" />
-            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-        </svg>
-    </a>
+    <div class="card-actions">
+        @if ($carts->cartItem->count() > 0)
+            <button class="btn card-action p-0 m-0 border-0 show-confirm" onclick="clearCart()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="icon icon-tabler icons-tabler-trash">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+            </button>
+        @endif
+    </div>
 </div>
 
 <div class="row row-cards p-3">
+
     @forelse ($carts->cartItem as $cart)
         <div class="col-md-6 col-lg-12">
             <div class="card">
@@ -25,6 +29,7 @@
                     <div class="col">
                         <div class="card-body">
                             {{ $cart->product->name }}
+<<<<<<< HEAD
                             <div class="row">
                                 <div class="col-6">
 
@@ -62,6 +67,10 @@
                                     </div>
 
                                 </div>
+=======
+                            <div class="text-secondary">
+                                Rp. {{ number_format($cart->product->price) }} x {{ $cart->quantity }}
+>>>>>>> 862026d5bc2a531c778f0f1dd395acd11bf9d064
                             </div>
                         </div>
                     </div>
@@ -77,6 +86,13 @@
             </div>
         </div>
     @endforelse
+
+    @if ($carts->cartItem->count() > 0)
+        <div>
+            Total Rp. {{ number_format($carts->total) }}
+        </div>
+    @endif
+
 </div>
 <div class="card-footer">
     <div class="d-flex justify-content-between">
