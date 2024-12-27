@@ -47,14 +47,6 @@ class CartController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -101,35 +93,17 @@ class CartController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+
+        CartItem::destroy($id);
+
+        return response()->json([
+            'status'    => 'success',
+            'message'   => 'Item Berhasil Dihapus'
+        ], 200);
     }
 
     public function clear()
@@ -141,5 +115,43 @@ class CartController extends Controller
             'status'    => 'success',
             'message'   => 'Keranjang Berhasil Dihapus'
         ], 200);
+    }
+
+    public function storeQty(Request $request)
+    {
+
+        $cartItem = CartItem::where([
+            'id'       => $request->id,
+        ])->first();
+
+        if ($request->quantity > $cartItem->product->qty) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Stok Produk tidak mencukupi'
+            ], 400);
+        }
+
+        if ($request->quantity == 1) {
+            $cartItem->quantity += $request->quantity;
+        } else {
+            $cartItem->quantity = $request->quantity;
+        }
+
+        $cartItem->save();
+    }
+
+    public function destroyQty(Request $request)
+    {
+
+        $cartItem = CartItem::where([
+            'id'       => $request->id,
+        ])->first();
+
+        $cartItem->quantity -= $request->quantity;
+
+        if ($cartItem->quantity < 1) {
+            $this->destroy($request->id);
+        }
+        $cartItem->save();
     }
 }

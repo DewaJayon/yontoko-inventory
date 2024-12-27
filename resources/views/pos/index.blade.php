@@ -128,23 +128,25 @@
 
 @section('scripts')
     <script>
+        var toastMixin = Swal.mixin({
+            toast: true,
+            icon: "success",
+            title: "General Title",
+            animation: false,
+            position: "top-right",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+        });
+
         $(document).ready(function() {
             getCart();
 
-            var toastMixin = Swal.mixin({
-                toast: true,
-                icon: "success",
-                title: "General Title",
-                animation: false,
-                position: "top-right",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer);
-                    toast.addEventListener("mouseleave", Swal.resumeTimer);
-                },
-            });
+
 
             $('#search').on('keyup', function() {
                 $.ajax({
@@ -220,6 +222,88 @@
                     })
                 }
             });
+        }
+
+        function plus(id) {
+            $.ajax({
+                url: "{{ route('cart.store-qty') }}",
+                method: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id: id,
+                    quantity: 1
+                },
+                success: function(data) {
+                    getCart();
+                }
+            })
+        }
+
+        function minus(id) {
+            $.ajax({
+                url: "{{ route('cart.destroy-qty') }}",
+                method: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id: id,
+                    quantity: 1
+                },
+                success: function(data) {
+                    getCart();
+                }
+            })
+        }
+
+        function storeInputQty(id) {
+            var qty = $('#quantity').val();
+
+            $.ajax({
+                url: "{{ route('cart.store-qty') }}",
+                method: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id: id,
+                    quantity: qty
+                },
+                success: function(data) {
+                    getCart();
+                },
+                error: function(data) {
+                    Swal.fire({
+                        icon: 'error',
+                        animation: true,
+                        title: data.responseJSON.message,
+                    })
+
+                    getCart();
+                }
+            })
+        }
+
+        function addToCart(id) {
+            var productId = id;
+            $.ajax({
+                url: "{{ route('cart.store') }}",
+                method: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    product_id: productId
+                },
+                success: function(data) {
+                    getCart();
+                    toastMixin.fire({
+                        animation: true,
+                        title: data.message,
+                    });
+                },
+                error: function(data) {
+                    toastMixin.fire({
+                        icon: 'error',
+                        animation: true,
+                        title: data.responseJSON.message,
+                    })
+                }
+            })
         }
     </script>
 @endsection
