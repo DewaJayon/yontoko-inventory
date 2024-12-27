@@ -196,5 +196,30 @@
                 }
             })
         }
+
+        function clearCart() {
+            Swal.fire({
+                title: "Apakah anda yakin?",
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Hapus!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('cart.clear') }}",
+                        method: "POST",
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                        },
+                        success: function(data) {
+                            getCart();
+                        }
+                    })
+                }
+            });
+        }
     </script>
 @endsection

@@ -1,5 +1,5 @@
 @forelse ($products as $product)
-    <div class="col-sm-6 col-lg-3 mb-3 add-to-cart" data-id="{{ $product->id }}" style="cursor: pointer">
+    <div class="col-sm-6 col-lg-3 mb-3 add-to-cart add-to-cart" data-id="{{ $product->id }}" style="cursor: pointer">
         <div class="card card-sm">
             <div class="d-block">
                 <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top">

@@ -22,10 +22,27 @@ class CartController extends Controller
                 'user_id'   => Auth::user()->id,
                 'total'     => 0,
             ]);
+        } else {
+            $this->calculateTotal($carts);
         }
 
         return view("pos.cart", [
             'carts' => $carts
+        ]);
+    }
+
+    private function calculateTotal(Cart $cart)
+    {
+        $total = 0;
+
+        if (count($cart->cartItem) > 0) {
+            foreach ($cart->cartItem as $item) {
+                $total += $item->product->price * $item->quantity;
+            }
+        };
+
+        $cart->update([
+            'total' => $total
         ]);
     }
 
@@ -113,5 +130,16 @@ class CartController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function clear()
+    {
+        $cart = Cart::where('user_id', Auth::user()->id)->first();
+        $cart->cartItem()->delete();
+
+        return response()->json([
+            'status'    => 'success',
+            'message'   => 'Keranjang Berhasil Dihapus'
+        ], 200);
     }
 }
