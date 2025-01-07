@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('product', ProductController::class);
 
     Route::get('/pos/search', [PosController::class, 'search'])->name('pos.search');
-    Route::resource('pos', PosController::class);
+    Route::get('pos', [PosController::class, 'index'])->name('pos.index');
     Route::resource('cart', CartController::class)->except(['create', 'show', 'edit', 'update']);
     Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::post('/cart/store-qty', [CartController::class, 'storeQty'])->name('cart.store-qty');
