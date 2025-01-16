@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\General;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 class Order extends Model
@@ -11,6 +12,11 @@ class Order extends Model
     protected $guarded = ["id"];
 
     const ORDERCODE = 'ORD';
+
+    public function orderItem(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
     public static function generateOrderCode()
     {
