@@ -19,4 +19,10 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
+
+    // menghitung total pajak 11%
+    public function calculateTax($total)
+    {
+        return $total * 0.11;
+    }
 }

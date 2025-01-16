@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <x-alert />
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
@@ -38,9 +39,8 @@
             <div class="row row-cards">
                 <div class="col-8">
                     <div class="row" id="products">
-
                         @forelse ($products as $product)
-                            <div class="col-sm-6 col-lg-3 mb-3 add-to-cart" data-product-id="{{ $product->id }}" style="cursor: pointer">
+                            <div class="col-sm-6 col-lg-3 mb-3" style="cursor: pointer" onclick="addToCart({{ $product->id }})">
                                 <div class="card card-sm">
                                     <div class="d-block">
                                         <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top">
@@ -75,7 +75,6 @@
                                 </div>
                             </div>
                         @empty
-
                             <div class="col-12">
                                 <div class="d-flex align-items-center justify-content-center text-secondary">
                                     <h1 class="text-center">
@@ -92,14 +91,17 @@
 
                 <div class="col-lg-4">
                     <div class="card cart">
-
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <div class="checkout"></div>
 @endsection
+
+
 
 @section('scripts')
     <script>
@@ -121,9 +123,9 @@
         $(document).ready(function() {
             getCart();
 
+            const search = $('#search');
 
-
-            $('#search').on('keyup', function() {
+            search.on('keyup', function() {
                 $.ajax({
                     url: "{{ route('pos.search') }}",
                     method: "GET",
@@ -134,7 +136,11 @@
                         $('#products').html(data);
                     }
                 })
+                if (search.val() == '' || search.val() == null) {
+                    location.reload();
+                }
             })
+
 
             $('.add-to-cart').on('click', function() {
                 var productId = $(this).data('product-id');
@@ -277,6 +283,17 @@
                         animation: true,
                         title: data.responseJSON.message,
                     })
+                }
+            })
+        }
+
+        function checkout() {
+            $.ajax({
+                url: "{{ route('pos.checkout') }}",
+                method: "GET",
+                success: function(data) {
+                    $('.checkout').html(data);
+                    $('#modal-checkout').modal('show');
                 }
             })
         }

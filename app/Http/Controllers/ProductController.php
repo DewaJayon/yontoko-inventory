@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         return view("product.index", [
             'title'     => 'Product',
-            'products'  => Product::all()
+            'products'  => Product::with("category")->get()
         ]);
     }
 
