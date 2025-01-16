@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -36,6 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::post('/cart/store-qty', [CartController::class, 'storeQty'])->name('cart.store-qty');
     Route::post('/cart/destroy-qty', [CartController::class, 'destroyQty'])->name('cart.destroy-qty');
+
+    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('order.show');
+    Route::delete('/order/{order:code}', [OrderController::class, 'destroy'])->name('order.destroy');
 });
 
 

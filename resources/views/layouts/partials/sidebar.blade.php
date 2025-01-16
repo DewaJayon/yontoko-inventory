@@ -51,17 +51,41 @@
                     <a class="nav-link" href="{{ route('pos.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-package">
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-cash-register">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-                                <path d="M12 12l8 -4.5" />
-                                <path d="M12 12l0 9" />
-                                <path d="M12 12l-8 -4.5" />
-                                <path d="M16 5.25l-8 4.5" />
+                                <path
+                                    d="M21 15h-2.5c-.398 0 -.779 .158 -1.061 .439c-.281 .281 -.439 .663 -.439 1.061c0 .398 .158 .779 .439 1.061c.281 .281 .663 .439 1.061 .439h1c.398 0 .779 .158 1.061 .439c.281 .281 .439 .663 .439 1.061c0 .398 -.158 .779 -.439 1.061c-.281 .281 -.663 .439 -1.061 .439h-2.5" />
+                                <path d="M19 21v1m0 -8v1" />
+                                <path
+                                    d="M13 21h-7c-.53 0 -1.039 -.211 -1.414 -.586c-.375 -.375 -.586 -.884 -.586 -1.414v-10c0 -.53 .211 -1.039 .586 -1.414c.375 -.375 .884 -.586 1.414 -.586h2m12 3.12v-1.12c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-2" />
+                                <path
+                                    d="M16 10v-6c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-4c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414v6m8 0h-8m8 0h1m-9 0h-1" />
+                                <path d="M8 14v.01" />
+                                <path d="M8 17v.01" />
+                                <path d="M12 13.99v.01" />
+                                <path d="M12 17v.01" />
                             </svg>
                         </span>
                         <span class="nav-link-title">
                             POS
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ request()->is('order*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('order.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-truck-delivery">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                                <path d="M3 9l4 0" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Order
                         </span>
                     </a>
                 </li>
