@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\isAdmin;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::get('/order/{order:code}', [OrderController::class, 'show'])->name('order.show');
     Route::delete('/order/{order:code}', [OrderController::class, 'destroy'])->name('order.destroy');
+
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/setting/change-photo', [SettingController::class, 'changePhoto'])->name('setting.change-photo');
 });
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
