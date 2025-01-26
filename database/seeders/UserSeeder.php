@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         foreach (User::all() as $user) {
 
             $defaultProfile = public_path('img/default-profile.jpg');
-            $folderPath = 'profiles/' . $user->name . '/';
+            $folderPath = 'profiles/' . str_replace(' ', '-', strtolower($user->name)) . '/';
 
             Storage::disk('public')->makeDirectory($folderPath);
             Storage::disk('public')->put($folderPath . 'default-profile.jpg', file_get_contents($defaultProfile));
