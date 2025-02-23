@@ -12,6 +12,7 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+
     public function sluggable(): array
     {
         return [

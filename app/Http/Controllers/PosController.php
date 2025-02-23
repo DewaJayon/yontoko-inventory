@@ -23,7 +23,7 @@ class PosController extends Controller
             return $this->search($request);
         }
 
-        $products = Product::with("category")->paginate(12);
+        $products = Product::with("category")->where('status', 1)->paginate(12);
 
         return view("pos.index", [
             "title"     => "POS System",
