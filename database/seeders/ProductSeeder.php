@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
 
         for ($i = 0; $i < 20; $i++) {
 
-            $imageSource = Http::get('https://picsum.photos/1920/1080?random');
+            $imageSource = Http::get('https://picsum.photos/1080/1080?random');
 
             $image = $imageSource->body();
 
