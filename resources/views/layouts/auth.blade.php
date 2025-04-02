@@ -31,11 +31,7 @@
     </div>
     <!-- Libs JS -->
     <!-- Tabler Core -->
-    @vite([
-        //
-        'resources/js/tabler.min.js',
-        'resources/js/demo.min.js',
-    ])
+    @vite(['resources/js/app.js'])
 
     <script>
         function showPassword() {
